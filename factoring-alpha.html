@@ -1,0 +1,229 @@
+<!--
+  Salesforce Email Template: Factoring Data Alert
+  ------------------------------------------------
+  This template notifies users about changes to a client's factoring data in the CRM system.
+  It is designed for maximum compatibility with Outlook and other email clients.
+  All styles are inline, and images should be PNGs hosted in Salesforce Static Resources or Documents.
+  Dynamic fields use Salesforce merge syntax (e.g., {!Account.Name}).
+  
+  Key Sections:
+    - Top image placeholder (decorative header, replace with your PNG URL)
+    - Main content card (700px wide, centered)
+    - Header with logo and title
+    - Client information card (shows factoring details)
+    - Additional info section (conditionally shown)
+    - Important info alert (color and icon depend on assignment status)
+    - Call to action button
+    - Footer with disclaimer
+    - Bottom image placeholder (decorative footer, replace with your PNG URL)
+-->
+<table width="1200" cellpadding="0" cellspacing="0" border="0"
+  style="background-color: #cfcfcf; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <!-- Decorative header image (replace src with your PNG URL) -->
+  <tr>
+    <td colspan="2" style="padding:0; border:none;">
+      <!-- Example: <img src="YOUR_PNG_URL_HERE" width="1200" height="auto" alt="" style="display:block; width:100%; max-width:1200px; height:auto;"/> -->
+    </td>
+  </tr>
+  <tr>
+    <td align="center" style="padding: 40px 20px;">
+      <!-- Main content card (centered, 700px wide) -->
+      <table width="700" cellpadding="0" cellspacing="0" border="0"
+        style="background-color: #ffffff; border: 1px solid #e5e7eb;">
+
+        <!-- Header: Logo and Title -->
+        <tr>
+          <td style="background-color: #1a7466; padding: 40px 30px; text-align: left;">
+            <!-- Company logo and title aligned left in a flexbox table -->
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: none; border: none;">
+              <tr>
+                <td style="width: 50px; vertical-align: middle; padding: 0 15px 0 0;">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png" alt="Logo"
+                    style="width: 40px; height: 40px; display: block;" />
+                </td>
+                <td style="vertical-align: middle; text-align: left;">
+                  <h1 style="color: #ffffff; font-size: 22px; font-weight: bold; margin: 0; line-height: 1.3;">
+                    Zieniono dane faktoringowe klienta
+                  </h1>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Main Content Section -->
+        <tr>
+          <td style="padding: 50px 40px;">
+            <!-- Intro paragraph and decorative line -->
+
+            <p style="color: #092d74; font-weight: bold; font-size: 18px; line-height: 1.4; margin: 0 0 16px 0;">
+              W systemie CRM zaktualizowano dane dotyczące faktoringu klienta:
+            </p>
+            <!-- Decorative green line using table instead of hr -->
+            <table cellpadding="0" cellspacing="0" border="0" style="margin: 0;">
+              <tr>
+                <td style="background-color: #b2cf65; width: 120px; height: 6px; font-size: 1px; line-height: 1px;">
+                  &nbsp;</td>
+              </tr>
+
+            </table>
+            <table cellpadding="0" cellspacing="0" border="0" style="margin: 0;">
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+
+            <!-- Client Information Card (factoring details) -->
+            <table width="100%" cellpadding="0" cellspacing="0" border="0"
+              style="background-color: #f8fafc; border-left: 8px solid #36a9e1; margin: 20px 0;">
+              <tr>
+                <td style="padding: 20px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <!-- Client Name -->
+                    <tr>
+                      <td width="35%"
+                        style="padding: 10px 15px 10px 0; border-bottom: 1px solid #e5e7eb; vertical-align: middle;">
+                        <strong style="color: #374151; font-size: 14px; font-weight: bold;">Klient:</strong>
+                      </td>
+                      <td width="65%" style="padding: 10px 0; border-bottom: 1px solid #e5e7eb; vertical-align: middle;">
+                        <span style="color: #1f2937; font-size: 14px;">{!Account.Name}</span>
+                      </td>
+                    </tr>
+                    <!-- Factoring Status -->
+                    <tr>
+                      <td style="padding: 10px 15px 10px 0; border-bottom: 1px solid #e5e7eb; vertical-align: middle;">
+                        <strong style="color: #374151; font-size: 14px; font-weight: bold;">Faktoring:</strong>
+                      </td>
+                      <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb; vertical-align: middle;">
+                        <span style="color: #1f2937; font-size: 14px;">{!Account.Factoring_Status__c}</span>
+                      </td>
+                    </tr>
+                    <!-- Assignment Start Date -->
+                    <tr>
+                      <td style="padding: 10px 15px 10px 0; border-bottom: 1px solid #e5e7eb; vertical-align: middle;">
+                        <strong style="color: #374151; font-size: 14px; font-weight: bold;">Data zawarcia
+                          cesji:</strong>
+                      </td>
+                      <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb; vertical-align: middle;">
+                        <span style="color: #1f2937; font-size: 14px;">{!IF(ISBLANK(Account.Assignment_Start_Date__c),
+                          'brak', TEXT(Account.Assignment_Start_Date__c))}</span>
+                      </td>
+                    </tr>
+                    <!-- Assignment End Date -->
+                    <tr>
+                      <td style="padding: 10px 15px 10px 0; border-bottom: 1px solid #e5e7eb; vertical-align: middle;">
+                        <strong style="color: #374151; font-size: 14px; font-weight: bold;">Data wycofania
+                          cesji:</strong>
+                      </td>
+                      <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb; vertical-align: middle;">
+                        <span style="color: #1f2937; font-size: 14px;">{!IF(ISBLANK(Account.Assignment_End_Date__c),
+                          'brak', TEXT(Account.Assignment_End_Date__c))}</span>
+                      </td>
+                    </tr>
+                    <!-- Current Assignment Status (color and label change based on status) -->
+                    <tr>
+                      <td style="padding: 10px 15px 10px 0; vertical-align: middle;">
+                        <strong style="color: #374151; font-size: 14px; font-weight: bold;">Aktualna cesja:</strong>
+                      </td>
+                      <td style="padding: 10px 0; vertical-align: middle;">
+                        <span
+                          style="color: {!IF(Account.Current_Assignment_Status__c, '#b2cf65', '#e60007')}; font-size: 14px; font-weight: bold;">
+                          {!IF(Account.Current_Assignment_Status__c, 'Aktywna', 'Nieaktywna')}
+                        </span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0" border="0" style="margin: 0;">
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+            <!-- Additional Information Section (completely separate table) -->
+            <table width="100%" cellpadding="0" cellspacing="0" border="0"
+              style="background-color: #f8fafc; border-left: 8px solid #ef7f00; margin: 20px 0;">
+              <tr>
+                <td style="padding: 20px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td width="35%" style="padding: 10px 15px 10px 0; vertical-align: middle;">
+                        <strong style="color: #374151; font-size: 14px; font-weight: bold;">Dodatkowe
+                          informacje:</strong>
+                      </td>
+                      <td width="65%" style="padding: 10px 0; vertical-align: middle;">
+                        <span
+                          style="color: #1f2937; font-size: 14px; line-height: 1.4;">{!Account.Additional_Info__c}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Important Information Section (separated with conditional styling) -->
+            <table width="100%" cellpadding="0" cellspacing="0" border="0"
+              style="background-color: {!IF(Account.Current_Assignment_Status__c, '#f0f9f0', '#fff7ed')}; border-left: 8px solid {!IF(Account.Current_Assignment_Status__c, '#b2cf65', '#ef7f00')}; margin: 20px 0;">
+              <tr>
+                <td style="padding: 20px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td style="vertical-align: middle;">
+                        <h3
+                          style="color: {!IF(Account.Current_Assignment_Status__c, '#16a34a', '#c2410c')}; font-size: 16px; font-weight: bold; margin: 0 0 12px 0;">
+                          Ważne informacje:
+                        </h3>
+                        <p
+                          style="color: {!IF(Account.Current_Assignment_Status__c, '#16a34a', '#c2410c')}; font-size: 14px; line-height: 1.4; margin: 0;">
+                          <!-- Message changes based on assignment status -->
+                          {!IF(Account.Current_Assignment_Status__c, 'Klient ma aktualny faktoring. Bardzo dlugi teskst testowy.', 'Klient ma nieaktualny faktoring. Bardzo dlugi teskst testowy.')}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Call to Action Button (Outlook-compatible approach) -->
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 30px 0;">
+              <tr>
+                <td align="center">
+                  <table cellpadding="15" cellspacing="0" border="0" style="background-color: #b2cf65;">
+                    <tr>
+                      <td align="center">
+                        <p style="margin: 0; padding: 0;">
+                          <a href="https://www.example.com"
+                            style="text-decoration: none; color: #ffffff; font-weight: bold; font-size: 16px;">Przejdź
+                            do panelu klienta →</a>
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Footer (disclaimer) -->
+        <tr>
+          <td style="background-color: #1a7466; padding: 30px 40px;">
+            <p style="color: #ffffff; font-size: 12px; line-height: 1.4; margin: 0; text-align: center;">
+              Ta wiadomość została wygenerowana automatycznie z systemu CRM.<br>
+              Jeśli masz pytania, skontaktuj się z administratorem systemu.
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+  <!-- Decorative footer image (replace src with your PNG URL) -->
+  <tr>
+    <td colspan="2" style="padding:0; border:none;">
+      <!-- Example: <img src="YOUR_PNG_URL_HERE" width="1200" height="auto" alt="" style="display:block; width:100%; max-width:1200px; height:auto;"/> -->
+    </td>
+  </tr>
+</table>
